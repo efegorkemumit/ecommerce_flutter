@@ -6,6 +6,24 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: Colors.green,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Hello Wordl",
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            ElevatedButton(onPressed: () {}, child: const Text("Hello world"))
+          ],
+        ),
+
+      ),
+    );
   }
 }
