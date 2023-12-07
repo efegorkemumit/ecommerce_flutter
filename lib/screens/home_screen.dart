@@ -1,4 +1,6 @@
+import 'package:ecommerce_flutter/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -6,8 +8,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.green,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -19,7 +21,15 @@ class HomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold
               ),
             ),
-            ElevatedButton(onPressed: () {}, child: const Text("Hello world"))
+            ElevatedButton(onPressed: () {}, child: const Text("Hello world")),
+            SwitchListTile(
+              title: Text(
+                themeProvider.getIsDarkTheme?"Dark Mode" : "LightM Mode"
+              ),
+                value: themeProvider.getIsDarkTheme, 
+                onChanged: (value){
+                  themeProvider.setDarkTheme(themeValue: value);
+                })
           ],
         ),
 
