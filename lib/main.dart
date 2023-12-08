@@ -1,5 +1,6 @@
 import 'package:ecommerce_flutter/constans/theme_data.dart';
 import 'package:ecommerce_flutter/providers/theme_provider.dart';
+import 'package:ecommerce_flutter/root_screen.dart';
 import 'package:ecommerce_flutter/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Eccomerce Ap ',
           theme: Styles.themeData(isDarkTheme: themeProvider.getIsDarkTheme, context: context),
-          home:const HomeScreen(),
+          home:const RootScreen(),
         );
 
         
