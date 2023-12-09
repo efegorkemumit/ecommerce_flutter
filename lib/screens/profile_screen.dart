@@ -68,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
                         SizedBox(
                           height:6,
                         ),
-                        SubTitleTextWidget(label: "Coding efegorkemumit@gmail.com")
+                        SubTitleTextWidget(label: "Coding --- Youtube Efe Görkem Ümit")
 
                       ],
 
@@ -144,6 +144,19 @@ class ProfileScreen extends StatelessWidget {
                 ],
 
               ),
+          ),
+          
+          Center(
+            child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0)
+                )
+              ),
+                
+                
+                onPressed: (){}, icon: const Icon(Icons.login), label: const Text("Login")),
           )
 
           
@@ -174,7 +187,7 @@ class CustomListTile extends StatelessWidget {
         imagePath,
         height: 34,
     ),
-      trailing:  const Icon(CupertinoIcons.arrow_right),
+      trailing:  const Icon(CupertinoIcons.chevron_right),
 
     );
   }
