@@ -38,6 +38,17 @@ class EmptyBagWidget extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
+          
+          SubTitleTextWidget(
+              label: title,
+            fontWeight: FontWeight.w800,
+            fontSize: 25,
+          ),
+
+          const SizedBox(
+            height: 20,
+          ),
+          
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SubTitleTextWidget(
