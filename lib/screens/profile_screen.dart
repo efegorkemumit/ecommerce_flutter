@@ -4,6 +4,7 @@ import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ecommerce_flutter/providers/theme_provider.dart';
+import 'package:flutter/cupertino.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -98,6 +99,48 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
+                  CustomListTile(
+                      imagePath:
+                      AssetsManager.bagimg2,
+                      text: "All Orders",
+                      function: () {}
+                  ),
+                  CustomListTile(
+                      imagePath:
+                      AssetsManager.bagimg1,
+                      text: "Favori",
+                      function: () {}
+                  ),
+                  CustomListTile(
+                      imagePath:
+                      AssetsManager.clock,
+                      text: "Viewed Recently",
+                      function: () {}
+                  ),
+                  CustomListTile(
+                      imagePath:
+                      AssetsManager.location,
+                      text: "Address",
+                      function: () {}
+                  ),
+                  const Divider(
+                    thickness: 1,
+                  ),
+                  CustomListTile(
+                      imagePath:
+                      AssetsManager.privacy,
+                      text: "Settings",
+                      function: () {}
+                  ),
+                  const SizedBox(height: 10),
+                  SwitchListTile(
+                      title: Text(
+                          themeProvider.getIsDarkTheme?"Dark Mode" : "LightM Mode"
+                      ),
+                      value: themeProvider.getIsDarkTheme,
+                      onChanged: (value){
+                        themeProvider.setDarkTheme(themeValue: value);
+                      })
                 ],
 
               ),
@@ -106,6 +149,33 @@ class ProfileScreen extends StatelessWidget {
           
         ],
       ),
+    );
+  }
+}
+
+class CustomListTile extends StatelessWidget {
+  const CustomListTile({
+    super.key,
+    required this.imagePath,
+    required this.text,
+    required this.function,
+
+  });
+  final String imagePath, text;
+  final Function function;
+  @override
+  Widget build(BuildContext context) {
+    return  ListTile(
+     onTap:(){
+       function();
+     },
+    title: SubTitleTextWidget(label: text),
+    leading: Image.asset(
+        imagePath,
+        height: 34,
+    ),
+      trailing:  const Icon(CupertinoIcons.arrow_right),
+
     );
   }
 }
