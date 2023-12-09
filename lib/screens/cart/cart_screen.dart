@@ -1,7 +1,8 @@
+import 'package:ecommerce_flutter/screens/cart/bottom_checkout.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
-import 'package:ecommerce_flutter/widgets/cart_widget.dart';
-import 'package:ecommerce_flutter/widgets/empty_bag.dart';
+import 'package:ecommerce_flutter/screens/cart/cart_widget.dart';
+import 'package:ecommerce_flutter/screens/cart/empty_bag.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ class CartScreen extends StatelessWidget {
           buttonText: "shop Now")
     )
         :Scaffold(
+      bottomSheet: CartBottomSheetWidget(),
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
