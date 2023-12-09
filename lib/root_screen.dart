@@ -23,7 +23,7 @@ class _RootScreenState extends State<RootScreen> {
       HomeScreen(),
       SearchScreen(),
       CartScreen(),
-      ProfileScreem(),
+      ProfileScreen(),
     ];
     controller = PageController(initialPage: currentScreen);
 
