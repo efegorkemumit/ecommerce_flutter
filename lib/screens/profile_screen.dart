@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/services/assets_manages.dart';
+import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,76 @@ class ProfileScreen extends StatelessWidget {
               child: Padding(padding: const EdgeInsets.all(8.0),
               child: TitleTextWidget(label: "label"),)
           ),
+          Visibility(
+            visible: true,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).cardColor,
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.background,
+                          width: 3
+                        ),
+
+                      ),
+                        child:ClipOval(
+                          child: Image.asset(
+                            AssetsManager.computer,
+                            fit: BoxFit.fill,
+                          ),
+                        )
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        TitleTextWidget(label: "Efe Görkem Ümit"),
+                        SizedBox(
+                          height:6,
+                        ),
+                        SubTitleTextWidget(label: "Coding efegorkemumit@gmail.com")
+
+                      ],
+
+                    )
+                  ],
+                ),
+              )
+
+
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Divider(
+                    thickness: 1,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const TitleTextWidget(
+                      label: "Information"
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+
+              ),
+          )
 
           
         ],
