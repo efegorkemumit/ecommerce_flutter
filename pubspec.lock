@@ -96,6 +96,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  iconly:
+    dependency: "direct main"
+    description:
+      name: iconly
+      sha256: "22f16dd28984d232891299ead9d9b75ae5a32b4d9cdf63e8e574f1ceb11dcbd9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   lints:
     dependency: transitive
     description:
@@ -248,6 +256,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  shimmer:
+    dependency: "direct main"
+    description:
+      name: shimmer
+      sha256: "5f88c883a22e9f9f299e5ba0e4f7e6054857224976a5d9f839d4ebdc94a14ac9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   sky_engine:
     dependency: transitive
     description: flutter

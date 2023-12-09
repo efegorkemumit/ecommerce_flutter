@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/services/assets_manages.dart';
+import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
           ),
 
         ),
-        title: const Text("Profile Screen"),
+        title: const AppNameTextWidget(fontSize: 20),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
