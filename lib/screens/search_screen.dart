@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:flutter/material.dart';
@@ -53,9 +55,32 @@ class _SearchScreenState extends State<SearchScreen> {
                 controller: searchTextController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search),
+                  suffixIcon: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        FocusScope.of(context).unfocus();
+                        searchTextController.clear();
+                      });
+                    },
+                    child: const Icon(
+                      Icons.clear,
+                      color:Colors.red,
+                    ),
+
+                  ),
 
                 ),
-              )
+                onChanged: (value) {
+                  // log("value of  text is $value");
+                },
+                onSubmitted: (value){
+                 // log("${searchTextController}");
+                },
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+
             ],
           ),
         )
