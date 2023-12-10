@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/screens/cart/quantity_btm_sheet.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,25 @@ class CardWidget extends StatelessWidget {
                         const SubTitleTextWidget(label: "16.00\$", color: Colors.blue),
                         const Spacer(),
                         OutlinedButton.icon(
-                          onPressed: (){},
+                          onPressed: () async{
+                            await showModalBottomSheet(
+                              backgroundColor:
+                              Theme.of(context).scaffoldBackgroundColor,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(40),
+                                    topRight: Radius.circular(40),
+                                  )
+
+                                ),
+
+                                context: context,
+                                builder: (context){
+                                  return const QuantityBottomSheetWidget();
+
+                                },
+                            );
+                          },
                           icon: const Icon(IconlyLight.arrow_down_2),
                           label: const Text("QTY : 6"),
                           style: OutlinedButton.styleFrom(
