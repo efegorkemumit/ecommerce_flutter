@@ -4,6 +4,7 @@ import 'package:ecommerce_flutter/screens/profile_screen.dart';
 import 'package:ecommerce_flutter/screens/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
@@ -60,7 +61,12 @@ class _RootScreenState extends State<RootScreen> {
 
           NavigationDestination(
             selectedIcon: Icon(CupertinoIcons.bag),
-            icon: Icon(CupertinoIcons.bag),
+            icon: Badge(
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              label: Text("5"),
+              child: Icon(IconlyLight.bag_2),
+            ),
             label: "Cart",
           ),
 
