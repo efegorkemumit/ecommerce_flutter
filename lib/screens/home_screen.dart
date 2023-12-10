@@ -1,4 +1,8 @@
+import 'package:card_swiper/card_swiper.dart';
+import 'package:ecommerce_flutter/constans/app_constans.dart';
 import 'package:ecommerce_flutter/providers/theme_provider.dart';
+import 'package:ecommerce_flutter/services/assets_manages.dart';
+import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -11,30 +15,59 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    Size size  = MediaQuery.of(context).size;
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      // APPBAR ------------------->
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(
+              AssetsManager.card
+          ),
 
-            const TitleTextWidget(
-              label:"Hello",
-            ),
-            const SubTitleTextWidget(
-              label:"Hello",
-            ),
-            ElevatedButton(onPressed: () {}, child: const Text("Hello world")),
-            SwitchListTile(
-              title: Text(
-                themeProvider.getIsDarkTheme?"Dark Mode" : "LightM Mode"
-              ),
-                value: themeProvider.getIsDarkTheme,
-                onChanged: (value){
-                  themeProvider.setDarkTheme(themeValue: value);
-                })
-          ],
         ),
+        title: const AppNameTextWidget(fontSize: 20),
       ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              height: size.height *0.25,
+              child: ClipRRect(
+                child: Swiper(
+                  itemBuilder: (BuildContext context, int index){
+                    return Image.asset(
+                      AppConstans.bannerImages[index],
+                      fit:BoxFit.fill,
+                    );
+
+                  },
+                  itemCount: AppConstans.bannerImages.length,
+                  pagination: SwiperPagination(
+                     builder: DotSwiperPaginationBuilder(
+                       activeColor: Colors.red, color: Colors.green
+                     )
+                  ),
+
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15.0,
+            ),
+            const TitleTextWidget(label: "Top Product"),
+            const SizedBox(
+              height: 15.0,
+            ),
+          ],
+        )
+
+      )
     );
   }
 }
