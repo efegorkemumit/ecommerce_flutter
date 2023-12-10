@@ -3,6 +3,7 @@ import 'package:ecommerce_flutter/constans/app_constans.dart';
 import 'package:ecommerce_flutter/providers/theme_provider.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
+import 'package:ecommerce_flutter/widgets/products/category_roundend_widget.dart';
 import 'package:ecommerce_flutter/widgets/products/product_widget.dart';
 import 'package:ecommerce_flutter/widgets/products/top_product.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
@@ -75,7 +76,24 @@ class HomeScreen extends StatelessWidget {
                      return TopProductWidget();
                   }
               ),
-            )
+            ),
+            const TitleTextWidget(label: "Categories"),
+            const SizedBox(
+              height: 15.0,
+            ),
+            GridView.count(
+              shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 4,
+              children:
+                List.generate(AppConstans.categoriesList.length, (index) {
+                  return CategoryRoundenWidget(
+                      image: AppConstans.categoriesList[index].image,
+                      name: AppConstans.categoriesList[index].name,
+                  );
+
+                }),
+            ),
           ],
         )
 
