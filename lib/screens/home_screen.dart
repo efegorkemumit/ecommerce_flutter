@@ -3,6 +3,8 @@ import 'package:ecommerce_flutter/constans/app_constans.dart';
 import 'package:ecommerce_flutter/providers/theme_provider.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
+import 'package:ecommerce_flutter/widgets/products/product_widget.dart';
+import 'package:ecommerce_flutter/widgets/products/top_product.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +66,16 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 15.0,
             ),
+            SizedBox(
+              height: size.height* 0.2,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                  itemCount: 10,
+                  itemBuilder: (context, index){
+                     return TopProductWidget();
+                  }
+              ),
+            )
           ],
         )
 
