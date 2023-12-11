@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ecommerce_flutter/widgets/products/heart_btn.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -51,10 +52,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ),
                   Flexible(
                     flex:2,
-                      child: IconButton(
-                        onPressed: (){},
-                        icon: const Icon(IconlyLight.heart),
-                      )
+                      child: HeartButtonWidget(),
                   )
                 ],
               ),

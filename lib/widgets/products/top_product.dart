@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:ecommerce_flutter/constans/app_constans.dart';
+import 'package:ecommerce_flutter/widgets/products/heart_btn.dart';
 import 'package:ecommerce_flutter/widgets/products/product_details.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -55,7 +56,7 @@ class TopProductWidget extends StatelessWidget {
                           child: Row(
                             children: [
                               IconButton(onPressed: () {},
-                                  icon: const Icon(IconlyBold.heart)
+                                  icon: HeartButtonWidget(),
                               ),
                               IconButton(onPressed: () {},
                                   icon: const Icon(IconlyLight.bag)

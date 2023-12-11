@@ -1,5 +1,6 @@
 import 'package:ecommerce_flutter/constans/app_constans.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
+import 'package:ecommerce_flutter/widgets/products/heart_btn.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -80,6 +81,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            HeartButtonWidget(
+                              bkgColor: Colors.pinkAccent.shade700,
+
+                            ),
                             const SizedBox(
                               width: 20,
                             ),

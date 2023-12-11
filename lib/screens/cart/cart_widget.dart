@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/screens/cart/quantity_btm_sheet.dart';
+import 'package:ecommerce_flutter/widgets/products/heart_btn.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class CardWidget extends StatelessWidget {
                         Column(
                           children: [
                             IconButton(onPressed: (){}, icon: const Icon(Icons.clear, color:Colors.red)),
-                            IconButton(onPressed: (){}, icon: const Icon(IconlyLight.heart))
+                            HeartButtonWidget()
 
                           ],
                         )
