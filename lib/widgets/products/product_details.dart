@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter/constans/app_constans.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
+import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 
@@ -74,26 +75,53 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Padding(
+                  Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                            "kalp"
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(child: SizedBox(
-                          height: kBottomNavigationBarHeight -10,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                                child: SizedBox(
+                                  height: kBottomNavigationBarHeight-10,
+                                  child: ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.red,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30.0)
+                                        ),
+                                      ) ,
+                                      onPressed: (){},
+                                      icon: const Icon(Icons.shopping_cart),
+                                      label: const Text("Add to cart")
+                                  ),
+                                ),
 
-                        ))
-                      ],
+                            ),
+                          ],
 
-                    ),
 
-                  )
+                      ),
+
+
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      TitleTextWidget(label: "About this item"),
+                      SubTitleTextWidget(label: "In shoes"),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SubTitleTextWidget(label: "Description" *50 )
+
                 ],
               )
             ),
