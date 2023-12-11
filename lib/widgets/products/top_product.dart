@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:ecommerce_flutter/constans/app_constans.dart';
+import 'package:ecommerce_flutter/widgets/products/product_details.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,8 +18,8 @@ class TopProductWidget extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
-          onTap: (){
-            log("to do add nav");
+          onTap: () async{
+            await Navigator.pushNamed(context, ProductDetailScreen.routName,);
           },
           child:  SizedBox(
             width: size.width*0.45,

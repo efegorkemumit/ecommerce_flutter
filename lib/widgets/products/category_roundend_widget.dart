@@ -14,7 +14,7 @@ class CategoryRoundenWidget extends StatelessWidget {
       children: [
         Image.asset(image, height: 50, width: 50,),
         const SizedBox(height: 5,),
-        SubTitleTextWidget(label: name, fontSize: 13, fontWeight: FontWeight.w200,)
+        SubTitleTextWidget(label: name, fontSize: 13, fontWeight: FontWeight.w900,)
       ],
     );
   }
