@@ -15,6 +15,8 @@ class AssetsManager{
   static String rounden_map = "$imagesPath/rounden_map.png";
   static String successfull = "$imagesPath/successfull.png";
   static String warning = "$imagesPath/warning.png";
+  static String searchrecent = "$imagesPath/search.png";
+
 
 // Profile Images
   static String clock = "$profileImagesPath/clock.png";

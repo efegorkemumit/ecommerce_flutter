@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
-  final bool isEmpty = false;
+  final bool isEmpty = true;
 
 
   @override

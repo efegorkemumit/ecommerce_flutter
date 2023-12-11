@@ -1,3 +1,5 @@
+import 'package:ecommerce_flutter/screens/init_screen/viewed_recently.dart';
+import 'package:ecommerce_flutter/screens/init_screen/wishlist.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
@@ -110,13 +112,17 @@ class ProfileScreen extends StatelessWidget {
                       imagePath:
                       AssetsManager.bagimg1,
                       text: "Favori",
-                      function: () {}
+                      function: () {
+                        Navigator.pushNamed(context, WishlistScreen.routName);
+                      }
                   ),
                   CustomListTile(
                       imagePath:
                       AssetsManager.clock,
                       text: "Viewed Recently",
-                      function: () {}
+                      function: () {
+                        Navigator.pushNamed(context, ViewedRecentlyScreen.routName);
+                      }
                   ),
                   CustomListTile(
                       imagePath:
