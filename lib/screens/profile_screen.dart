@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter/screens/init_screen/viewed_recently.dart';
 import 'package:ecommerce_flutter/screens/init_screen/wishlist.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
+import 'package:ecommerce_flutter/services/myapp_functions.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
@@ -152,7 +153,7 @@ class ProfileScreen extends StatelessWidget {
 
               ),
           ),
-          
+
           Center(
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
@@ -161,9 +162,19 @@ class ProfileScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30.0)
                 )
               ),
-                
-                
-                onPressed: (){}, icon: const Icon(Icons.login), label: const Text("Login")),
+
+
+                onPressed: () async {
+                await MyAppFunctions.showErrorOrWaningDialog(
+                  context: context,
+                  subtitle: "are you sure ? ",
+                  fct: () {},
+                  isError : false
+                );
+
+
+
+                }, icon: const Icon(Icons.login), label: const Text("Login")),
           )
 
           
