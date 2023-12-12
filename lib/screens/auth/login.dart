@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/constans/validator.dart';
+import 'package:ecommerce_flutter/screens/auth/register.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/google_btn.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
@@ -216,8 +217,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           SubTitleTextWidget(label: "New Here ?"),
                         TextButton(
-                            onPressed: (){},
-                            child: const SubTitleTextWidget(label: "Sign in" , fontStyle: FontStyle.italic ,))
+                            onPressed: (){
+                              Navigator.of(context).pushNamed(RegisterScreen.routName);
+                            },
+                            child: const SubTitleTextWidget(label: "Sign up" , fontStyle: FontStyle.italic ,))
 
                         ],
                       )
