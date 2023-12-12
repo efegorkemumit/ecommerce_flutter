@@ -1,5 +1,6 @@
 import 'package:ecommerce_flutter/constans/validator.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
+import 'package:ecommerce_flutter/widgets/google_btn.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -166,28 +167,45 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 16.0,
                       ),
+                      SizedBox(
+                        height: kBottomNavigationBarHeight  +10 ,
+                        child: Row(
+                          children: [
+                            const Expanded(
+                                flex: 2,
+                                child: SizedBox(
+                                  height: kBottomNavigationBarHeight,
+                                  child:  FittedBox(
+                                    child: GoogleButton(),
+                                  ),
+                                ),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Expanded(
+                                flex: 2,
+                                child: SizedBox(
+                                  height: kBottomNavigationBarHeight-15,
+                                  child:  ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.all(5.0),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(24.0)
+                                          )
+                                      ),
+                                      onPressed: () async {},
+                                      child: Text("Guest")
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.all(16.0),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12.0)
-                                  )
-                              ),
-                              onPressed: () async { await _loginFct();},
-                              icon: const Icon(Icons.person),
-                              label: Text("Guest")
 
-
-                          ),
-                        ],
-
-
-
+                                  ),
+                                )
+                            )
+                          ],
+                        ),
                       ),
+
+
                       const SizedBox(
                         height: 16.0,
                       ),
