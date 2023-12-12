@@ -1,7 +1,9 @@
+import 'package:ecommerce_flutter/constans/validator.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routName = "/RegisterScreen";
@@ -60,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   }
 
-  Future<void> registerFCT() async{
+  Future<void> _registerFCT() async{
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
   }
@@ -101,6 +103,126 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           const SizedBox(
                           height: 20,
                           ),
+                            Form(
+                              key: _formkey,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+
+                                  TextFormField(
+                                    controller: _nameController,
+                                    focusNode: _nameFocusNode,
+                                    textInputAction: TextInputAction.next,
+                                    keyboardType: TextInputType.name,
+                                    decoration: const InputDecoration(
+                                        hintText: "Full name",
+                                        prefixIcon: Icon ( Icons.person)
+                                    ),
+                                    onFieldSubmitted: (value){
+                                      FocusScope.of(context).requestFocus(_emailFocusNode);
+                                    },
+                                    validator: (value){
+                                      return MyValidators.displayNameValidator(value);
+                                    },
+
+
+
+                                  ),
+                                  const SizedBox(
+                                    height: 16.0,
+                                  ),
+
+                                  TextFormField(
+                                    controller: _emailController,
+                                    focusNode: _emailFocusNode,
+                                    textInputAction: TextInputAction.next,
+                                    keyboardType: TextInputType.emailAddress,
+                                    decoration: const InputDecoration(
+                                        hintText: "Email Adress",
+                                        prefixIcon: Icon ( IconlyLight.message)
+                                    ),
+                                    onFieldSubmitted: (value){
+                                      FocusScope.of(context).requestFocus(_passwordFocusNode);
+                                    },
+                                    validator: (value){
+                                      return MyValidators.EmailValidator(value);
+                                    },
+
+
+
+                                  ),
+                                  const SizedBox(
+                                    height: 16.0,
+                                  ),
+
+                                  TextFormField(
+                                    controller: _passwordController,
+                                    focusNode: _passwordFocusNode,
+                                    textInputAction: TextInputAction.next,
+                                    keyboardType: TextInputType.visiblePassword,
+                                    decoration: const InputDecoration(
+                                        hintText: "********",
+                                        prefixIcon: Icon ( IconlyLight.password)
+                                    ),
+                                    onFieldSubmitted: (value){
+                                      FocusScope.of(context).requestFocus(_repeatPasswordFocuNode);
+                                    },
+                                    validator: (value){
+                                      return MyValidators.PasswordValidator(value);
+                                    },
+
+
+
+                                  ),
+                                  const SizedBox(
+                                    height: 16.0,
+                                  ),
+
+                                  TextFormField(
+                                    controller: _repeatPasswordController,
+                                    focusNode: _repeatPasswordFocuNode,
+                                    textInputAction: TextInputAction.done,
+                                    keyboardType: TextInputType.visiblePassword,
+                                    decoration: const InputDecoration(
+                                        hintText: "********",
+                                        prefixIcon: Icon ( IconlyLight.password)
+                                    ),
+                                    onFieldSubmitted: (value) async{
+                                      await _registerFCT();
+
+                                    },
+                                    validator: (value){
+                                      return MyValidators.PasswordValidator(value);
+                                    },
+
+
+
+                                  ),
+                                  const SizedBox(
+                                    height: 48.0,
+                                  ),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child:  ElevatedButton.icon(
+                                        style: ElevatedButton.styleFrom(
+                                            padding: const EdgeInsets.all(16.0),
+                                            backgroundColor: Colors.red,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(12.0)
+                                            )
+                                        ),
+                                        onPressed: () async { await _registerFCT();},
+                                        icon: const Icon(Icons.save),
+                                        label: Text("Sign up ")
+
+
+                                    ),
+                                  ),
+
+
+                                ],
+                              ),
+                            )
     ]
     ),
     ),
