@@ -10,6 +10,44 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+
+  late final FocusNode _emailFocusNode;
+  late final FocusNode _passwordFocusNode;
+
+  final _formkey = GlobalKey<FormState>();
+
+  @override
+  void initState(){
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+
+    _emailFocusNode = FocusNode();
+    _passwordFocusNode = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose(){
+    if(mounted){
+      _emailController.dispose();
+      _passwordController.dispose();
+
+      _emailFocusNode.dispose();
+      _passwordFocusNode.dispose();
+    }
+    super.dispose();
+
+  }
+
+  Future<void> _loginFct() async{
+    final isValid = _formkey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                
+
 
               ],
             ),
