@@ -108,14 +108,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 20,
                           ),
 
-                            SizedBox(
-                              height: size.width * 0.3,
-                              width: size.width * 0.3,
-                              child: PickImageWidget(
-                                pickedImage: _pickedImage,
-                                  function: (){})
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color:Colors.blue),
+                                  borderRadius: BorderRadius.circular(25)
+                              ),
+                              child:
+                              SizedBox(
+                                  height: size.width * 0.3,
+                                  width: size.width * 0.3,
+                                  child: PickImageWidget(
+                                      pickedImage: _pickedImage,
+                                      function: (){})
+
+                              ),
+
 
                             ),
+
+
 
 
 

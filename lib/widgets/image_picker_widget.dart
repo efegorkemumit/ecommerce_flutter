@@ -19,7 +19,7 @@ class PickImageWidget extends StatelessWidget {
     return Stack(
       children: [
         Padding(
-            padding : const EdgeInsets.all(100),
+            padding : const EdgeInsets.all(10.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
 
@@ -39,6 +39,24 @@ class PickImageWidget extends StatelessWidget {
 
 
         ),
+        Positioned(
+          top: 0,
+            right: 0,
+            child: Material(
+                borderRadius: BorderRadius.circular(12.0),
+                color: Colors.blue,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(12.0),
+                onTap: (){},
+                splashColor: Colors.red,
+                child: const Padding(
+                  padding: EdgeInsets.all(6.0),
+                  child: Icon(Icons.shopping_cart, size: 15 ),
+                ),
+              ),
+            )
+
+        )
 
       ],
     );
