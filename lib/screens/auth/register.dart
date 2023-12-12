@@ -1,9 +1,11 @@
 import 'package:ecommerce_flutter/constans/validator.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
+import 'package:ecommerce_flutter/widgets/image_picker_widget.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routName = "/RegisterScreen";
@@ -25,6 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _repeatPasswordFocuNode;
 
   final _formkey = GlobalKey<FormState>();
+  XFile? _pickedImage;
 
   @override
   void initState(){
@@ -70,6 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -103,6 +107,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           const SizedBox(
                           height: 20,
                           ),
+
+                            SizedBox(
+                              height: size.width * 0.3,
+                              width: size.width * 0.3,
+                              child: PickImageWidget(
+                                pickedImage: _pickedImage,
+                                  function: (){})
+
+                            ),
+
+
+
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+
                             Form(
                               key: _formkey,
                               child: Column(
