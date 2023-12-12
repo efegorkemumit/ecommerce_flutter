@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter/screens/cart/empty_bag.dart';
 import 'package:ecommerce_flutter/screens/init_screen/wishlist.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
+import 'package:ecommerce_flutter/widgets/order/order_widget.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +46,7 @@ class _OrderScreenState extends State<OrderScreen> {
           itemBuilder: (ctx, index){
             return const Padding(
                 padding:  EdgeInsets.symmetric(horizontal: 2, vertical:  6),
-              child: WishlistScreen(),
+              child: OrdersWidgetFree(),
 
             );
           },
