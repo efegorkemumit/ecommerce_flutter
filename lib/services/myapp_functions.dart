@@ -3,6 +3,7 @@
 
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
+import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 
 class MyAppFunctions{
@@ -78,4 +79,66 @@ class MyAppFunctions{
 
 
   }
+  static Future<void> ImagePickerDialog({
+    required BuildContext context,
+    required Function cameraFCT,
+    required Function galleryFCT,
+    required Function removeFCT,
+
+})async{
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title:  const Center(
+              child: TitleTextWidget(label: "Chooese option"),
+            ),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: [
+
+                  TextButton.icon(
+                      onPressed: (){
+                        cameraFCT();
+                        if(Navigator.canPop(context)){
+                          Navigator.pop(context);
+                        }
+                      },
+                      icon: const Icon(Icons.camera),
+                      label: const Text("Camera")
+                  ),
+
+
+                  TextButton.icon(
+                      onPressed: (){
+                        galleryFCT();
+                        if(Navigator.canPop(context)){
+                          Navigator.pop(context);
+                        }
+                      },
+                      icon: const Icon(Icons.image),
+                      label: const Text("Gallery")
+                  ),
+
+
+                  TextButton.icon(
+                      onPressed: (){
+                        removeFCT();
+                        if(Navigator.canPop(context)){
+                          Navigator.pop(context);
+                        }
+                      },
+                      icon: const Icon(Icons.delete),
+                      label: const Text("Remove")
+                  ),
+
+                ],
+              ),
+            ),
+          );
+        }
+    );
+
+  }
+
  }
