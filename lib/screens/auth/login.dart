@@ -1,5 +1,6 @@
 import 'package:ecommerce_flutter/constans/validator.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
+import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
@@ -110,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         focusNode: _passwordFocusNode,
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.visiblePassword,
+                        obscureText: true,
                         decoration: const InputDecoration(
                             hintText: "*********",
                             prefixIcon: Icon ( IconlyLight.password)
@@ -124,6 +126,84 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
                       ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: (){},
+                          child: const SubTitleTextWidget(
+                            label: "Forget Password",
+                            fontStyle: FontStyle.italic,
+                            textDecoration: TextDecoration.underline,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child:  ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.all(16.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0)
+                            )
+                          ),
+                            onPressed: () async { await _loginFct();},
+                            icon: const Icon(Icons.login),
+                            label: Text("Login")
+
+
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      
+                      SubTitleTextWidget(label: "Or Connect using"),
+
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.all(16.0),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0)
+                                  )
+                              ),
+                              onPressed: () async { await _loginFct();},
+                              icon: const Icon(Icons.person),
+                              label: Text("Guest")
+
+
+                          ),
+                        ],
+
+
+
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+
+                      Row(
+
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SubTitleTextWidget(label: "New Here ?"),
+                        TextButton(
+                            onPressed: (){},
+                            child: const SubTitleTextWidget(label: "Sign in" , fontStyle: FontStyle.italic ,))
+
+                        ],
+                      )
+
                     ],
                   ),
                 )
