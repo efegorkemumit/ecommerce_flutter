@@ -3,6 +3,7 @@ import 'package:ecommerce_flutter/screens/init_screen/wishlist.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/services/myapp_functions.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
+import 'package:ecommerce_flutter/widgets/order/order_screen.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +108,10 @@ class ProfileScreen extends StatelessWidget {
                       imagePath:
                       AssetsManager.bagimg2,
                       text: "All Orders",
-                      function: () {}
+                      function: () {
+                        Navigator.pushNamed(context, OrderScreen.routName);
+
+                      }
                   ),
                   CustomListTile(
                       imagePath:
