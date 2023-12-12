@@ -160,9 +160,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     focusNode: _passwordFocusNode,
                                     textInputAction: TextInputAction.next,
                                     keyboardType: TextInputType.visiblePassword,
-                                    decoration: const InputDecoration(
-                                        hintText: "********",
-                                        prefixIcon: Icon ( IconlyLight.password)
+                                    obscureText: obscureText,
+                                    decoration:  InputDecoration(
+                                        hintText: "Password",
+                                        prefixIcon: Icon ( IconlyLight.password),
+                                        suffixIcon: IconButton(
+                                          onPressed: (){
+                                            setState(() {
+                                              obscureText = !obscureText;
+                                            });
+                                          },
+                                          icon: Icon(
+                                            obscureText ? Icons.visibility
+                                                :Icons.visibility_off
+                                          ),
+                                        )
                                     ),
                                     onFieldSubmitted: (value){
                                       FocusScope.of(context).requestFocus(_repeatPasswordFocuNode);
@@ -183,9 +195,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     focusNode: _repeatPasswordFocuNode,
                                     textInputAction: TextInputAction.done,
                                     keyboardType: TextInputType.visiblePassword,
-                                    decoration: const InputDecoration(
-                                        hintText: "********",
-                                        prefixIcon: Icon ( IconlyLight.password)
+                                    obscureText: obscureText,
+                                    decoration:  InputDecoration(
+                                        hintText: "Repeat Password",
+                                        prefixIcon: Icon ( IconlyLight.password),
+                                        suffixIcon: IconButton(
+                                          onPressed: (){
+                                            setState(() {
+                                              obscureText = !obscureText;
+                                            });
+                                          },
+                                          icon: Icon(
+                                              obscureText ? Icons.visibility
+                                                  :Icons.visibility_off
+                                          ),
+                                        )
                                     ),
                                     onFieldSubmitted: (value) async{
                                       await _registerFCT();
