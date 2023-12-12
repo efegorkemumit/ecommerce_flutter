@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/constans/validator.dart';
+import 'package:ecommerce_flutter/services/myapp_functions.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/image_picker_widget.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
@@ -70,6 +71,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
     FocusScope.of(context).unfocus();
   }
 
+  Future<void> localImagePicker () async{
+    final ImagePicker imagePicker = ImagePicker();
+    await MyAppFunctions.ImagePickerDialog(
+        context: context,
+        cameraFCT: () async{
+          _pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+        setState(() {
+
+        });
+        },
+        galleryFCT: () async{
+          _pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+          setState(() {
+
+          });
+        },
+        removeFCT: (){
+          setState(() {
+            _pickedImage =null;
+          });
+        }
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +144,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   width: size.width * 0.3,
                                   child: PickImageWidget(
                                       pickedImage: _pickedImage,
-                                      function: (){})
+                                      function: ()  async{
+                                        await localImagePicker();
+                                      }
+
+                                  )
 
                               ),
 
