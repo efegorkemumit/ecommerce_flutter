@@ -174,7 +174,7 @@ class ProfileScreen extends StatelessWidget {
 
 
 
-                }, icon: const Icon(Icons.login), label: const Text("Login")),
+                }, icon: const Icon(Icons.login), label: const Text("Logout")),
           )
 
           

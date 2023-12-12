@@ -21,7 +21,9 @@ class MyAppFunctions{
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16)
             ),
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             content: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(
                     isError ? AssetsManager.error : AssetsManager.warning,
@@ -36,7 +38,28 @@ class MyAppFunctions{
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [],
+                  children: [
+                    Visibility(
+                         visible: !isError,
+                        child: TextButton(
+                          onPressed: (){
+                            Navigator.pop(context);
+                          },
+                          child: const SubTitleTextWidget(label: "Cancel", color:Colors.greenAccent),
+                        )
+                    
+                    ),
+                    TextButton(
+                      onPressed: (){
+                        Navigator.pop(context);
+
+                      },
+                      child: const SubTitleTextWidget(label: "Ok", color:Colors.red),
+                    )
+                    
+                    
+                    
+                  ],
 
 
                 )
