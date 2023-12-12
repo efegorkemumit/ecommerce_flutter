@@ -1,6 +1,8 @@
+import 'package:ecommerce_flutter/constans/validator.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -76,6 +78,55 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 20,
                 ),
+                Form(
+                  key:_formkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextFormField(
+                        controller: _emailController,
+                        focusNode: _emailFocusNode,
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          hintText: "Email Adress",
+                          prefixIcon: Icon ( IconlyLight.message)
+                        ),
+                        onFieldSubmitted: (value){
+                          FocusScope.of(context).requestFocus(_passwordFocusNode);
+                        },
+                        validator: (value){
+                          return MyValidators.EmailValidator(value);
+                        },
+
+
+
+                      ),
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        focusNode: _passwordFocusNode,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: const InputDecoration(
+                            hintText: "*********",
+                            prefixIcon: Icon ( IconlyLight.password)
+                        ),
+                        onFieldSubmitted: (value) async {
+                          await _loginFct();
+                        },
+                        validator: (value){
+                          return MyValidators.PasswordValidator(value);
+                        },
+
+
+
+                      ),
+                    ],
+                  ),
+                )
 
 
               ],
