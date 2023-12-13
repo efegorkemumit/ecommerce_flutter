@@ -2,11 +2,13 @@ import 'dart:developer';
 
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:ecommerce_flutter/models/product_model.dart';
+import 'package:ecommerce_flutter/providers/product_provider.dart';
 import 'package:ecommerce_flutter/screens/cart/cart_widget.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/products/product_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -33,6 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider = Provider.of<ProductProvider>(context);
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).unfocus();
@@ -88,15 +91,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 mainAxisSpacing: 12,
                 crossAxisCount: 2,
                 crossAxisSpacing: 12,
-                itemCount: ProductModel.products.length,
+                itemCount: productsProvider.getProducts.length,
                 builder: (context, index){
-                  return  ProductWidget(
-                    image: ProductModel.products[index].productImage,
-                    price: ProductModel.products[index].productPrice,
-                    title: ProductModel.products[index].productTitle,
-
-
-                  );
+                  return  ProductWidget(productId: productsProvider.getProducts[index].productId );
                 },
               ))
 
