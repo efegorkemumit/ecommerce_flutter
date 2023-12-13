@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/constans/theme_data.dart';
+import 'package:ecommerce_flutter/providers/product_provider.dart';
 import 'package:ecommerce_flutter/providers/theme_provider.dart';
 import 'package:ecommerce_flutter/root_screen.dart';
 import 'package:ecommerce_flutter/screens/auth/forgot_password.dart';
@@ -25,7 +26,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (_){
         return ThemeProvider();
-      })
+      }),
+      ChangeNotifierProvider(create: (_){
+        return ProductProvider();
+      }),
 
     ],
       child: Consumer<ThemeProvider>(builder: (context, themeProvider, child){
