@@ -40,7 +40,7 @@ class ProductModel{
       productCategory: "Phones",
       productDescription:
       "Introducing the Samsung Galaxy S22 Ultra with a stunning 6.8-inch Dynamic AMOLED display. Capture every moment with the 108MP camera. Enjoy the power of the latest Exynos processor and a massive 5000mAh battery. The sleek Phantom Black design adds a touch of elegance to your mobile experience.",
-      productImage: "https://i.ibb.co/QmhkDMB/2-samsung-galaxy-s22-ultra.webp",
+      productImage: "https://i.ibb.co/nbwTvXQ/2-iphone13-mini-256gb-midnight.webp",
       productQuantity: "15",
     ),
 
@@ -52,7 +52,7 @@ class ProductModel{
       productCategory: "Laptops",
       productDescription:
       "Experience the incredible performance of the Apple MacBook Air M2. Powered by the latest M2 chip, this laptop delivers unparalleled speed and efficiency. The 13.3-inch Retina display offers stunning visuals, while the sleek Space Gray design adds a touch of sophistication.",
-      productImage: "https://i.ibb.co/pxYjT2c/3-macbook-air-m2-512gb.webp",
+      productImage: "https://i.ibb.co/G7nXCW4/3-i-Phone-14.jpg",
       productQuantity: "8",
     ),
 
@@ -64,7 +64,7 @@ class ProductModel{
       productCategory: "Audio",
       productDescription:
       "Immerse yourself in music with the Sony WH-1000XM5 headphones. Industry-leading noise cancellation technology ensures a distraction-free listening experience. Enjoy the rich sound quality and all-day comfort. Touch controls make it easy to manage your music and calls.",
-      productImage: "https://i.ibb.co/QfRf23v/4-sony-noise-cancelling-headphones.webp",
+      productImage: "https://i.ibb.co/z5zMDCx/4-Samsung-Galaxy-S22-Ultra-5-G-256-GB-Phantom-Black-Unlocked.webp",
       productQuantity: "20",
     ),
 
@@ -76,7 +76,7 @@ class ProductModel{
       productCategory: "Gaming",
       productDescription:
       "Upgrade your gaming experience with the Nintendo Switch Pro. The vibrant 7-inch OLED screen provides crisp visuals, and the enhanced audio ensures immersive gameplay. With the new NVIDIA custom processor, enjoy faster and smoother performance in your favorite games.",
-      productImage: "https://i.ibb.co/6yL3x7J/5-nintendo-switch-pro.webp",
+      productImage: "https://i.ibb.co/ww5WjkV/5-Samsung-Galaxy-S21-Ultra-5-G.png",
       productQuantity: "12",
     ),
     ProductModel(
@@ -87,7 +87,7 @@ class ProductModel{
       productCategory: "TVs",
       productDescription:
       "Transform your entertainment experience with the LG 4K Ultra HD Smart TV. Enjoy lifelike picture quality on the 65-inch display. Smart TV features allow you to access your favorite streaming services with ease. ThinQ AI technology enhances your viewing experience.",
-      productImage: "https://i.ibb.co/JmQmXcx/7-lg-4k-ultra-hd-smart-tv.webp",
+      productImage: "https://i.ibb.co/0yhgKVv/6-One-Plus-9-Pro-5-G-LE2120-256-GB-12-GB-RAM.png",
       productQuantity: "5",
     ),
 
@@ -99,7 +99,7 @@ class ProductModel{
       productCategory: "Wearables",
       productDescription:
       "Achieve your fitness goals with the Fitbit Charge 5. Track your heart rate, sleep, and activity levels with precision. The vibrant AMOLED display provides real-time stats and notifications. With built-in GPS, explore new routes and monitor your progress.",
-      productImage: "https://i.ibb.co/GkWxP8D/8-fitbit-charge-5-fitness-tracker.webp",
+      productImage: "https://i.ibb.co/NstFstg/7-Samsung-Galaxy-Z-Flip3-5-G.png",
       productQuantity: "18",
     ),
 
@@ -111,7 +111,7 @@ class ProductModel{
       productCategory: "Cameras",
       productDescription:
       "Unleash your creativity with the Canon EOS R5 Mirrorless Camera. Capture stunning, high-resolution images with the 45MP full-frame sensor. Advanced autofocus and in-body image stabilization ensure sharp and steady shots. 8K video recording for cinematic masterpieces.",
-      productImage: "https://i.ibb.co/yP14zm9/9-canon-eos-r5-mirrorless-camera.webp",
+      productImage: "https://i.ibb.co/8P1HBm4/8-iphone14plushereo.jpg",
       productQuantity: "7",
     ),
 

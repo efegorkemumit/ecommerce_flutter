@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
+import 'package:ecommerce_flutter/models/product_model.dart';
 import 'package:ecommerce_flutter/screens/cart/cart_widget.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
@@ -87,9 +88,15 @@ class _SearchScreenState extends State<SearchScreen> {
                 mainAxisSpacing: 12,
                 crossAxisCount: 2,
                 crossAxisSpacing: 12,
-                itemCount: 200,
+                itemCount: ProductModel.products.length,
                 builder: (context, index){
-                  return const ProductWidget();
+                  return  ProductWidget(
+                    image: ProductModel.products[index].productImage,
+                    price: ProductModel.products[index].productPrice,
+                    title: ProductModel.products[index].productTitle,
+
+
+                  );
                 },
               ))
 

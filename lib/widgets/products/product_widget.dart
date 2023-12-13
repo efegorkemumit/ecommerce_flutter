@@ -9,8 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 
 class ProductWidget extends StatefulWidget {
-  const ProductWidget({super.key});
+  const ProductWidget({super.key,
+    this.image,
+    this.title,
+    this.price
 
+  }
+      );
+
+  final String? image, title, price;
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
 }
@@ -30,7 +37,7 @@ class _ProductWidgetState extends State<ProductWidget> {
             ClipRRect(
               borderRadius:  BorderRadius.circular(12.0),
               child: FancyShimmerImage(
-                imageUrl: 'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+                imageUrl: widget.image ??  'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
                 height: size.height*0.2,
                 width: size.height*0.2,
 
@@ -45,7 +52,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 children: [
                   Flexible(
                     flex: 5,
-                      child: TitleTextWidget(label: "Title",
+                      child: TitleTextWidget(label:  widget.title ?? "Title",
                       fontSize: 18,
 
                       )
@@ -65,9 +72,9 @@ class _ProductWidgetState extends State<ProductWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Flexible(
+                   Flexible(
                     flex:1,
-                      child: SubTitleTextWidget(label: "150.00\$", fontWeight: FontWeight.w600, color:Colors.red,)
+                      child: SubTitleTextWidget(label: widget.price ??  "150.00\$", fontWeight: FontWeight.w600, color:Colors.red,)
                   ),
                   Flexible(
                       child: Material(
