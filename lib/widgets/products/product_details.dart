@@ -5,6 +5,8 @@ import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ecommerce_flutter/providers/product_provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   static const routName = "/ProductDetailScreen";
@@ -17,6 +19,9 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final productsProvider = Provider.of<ProductProvider>(context);
+    String? productId = ModalRoute.of(context)!.settings.arguments as String?;
+    final getCurrProduct = productsProvider.findByProId(productId!);
     Size size  = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -34,11 +39,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ),
         title: const AppNameTextWidget(fontSize: 20,),
       ),
-      body: SingleChildScrollView(
+      body: getCurrProduct == null
+      ? const SizedBox.shrink()
+      : SingleChildScrollView(
         child: Column(
           children: [
             FancyShimmerImage(
-                imageUrl: AppConstans.imageUrl,
+                imageUrl: getCurrProduct.productImage,
                 height: size.height * 0.35,
                 width: double.infinity,
 
@@ -55,7 +62,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     children: [
                       Flexible(
                         child: Text(
-                            "Title"*20,
+                            getCurrProduct.productTitle,
                           softWrap: true,
                           style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.w500)
@@ -64,8 +71,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         const SizedBox(
                           width: 20,
                         ),
-                      const SubTitleTextWidget(
-                          label: "\$1000.00",
+                       SubTitleTextWidget(
+                          label: "\$${getCurrProduct.productPrice}",
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
                         color: Colors.red,
@@ -117,15 +124,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children:  [
                       TitleTextWidget(label: "About this item"),
-                      SubTitleTextWidget(label: "In shoes"),
+                      SubTitleTextWidget(
+                        label: " In ${getCurrProduct.productCategory}",
+                      ),
                     ],
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  SubTitleTextWidget(label: "Description" *50 )
+                  SubTitleTextWidget(label: getCurrProduct.productDescription)
 
                 ],
               )
