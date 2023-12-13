@@ -7,6 +7,7 @@ import 'package:ecommerce_flutter/screens/cart/cart_widget.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/products/product_widget.dart';
+import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,11 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final productsProvider = Provider.of<ProductProvider>(context);
+    String? passedCategory =
+        ModalRoute.of(context)!.settings.arguments as String?;
+    List<ProductModel>productList = passedCategory == null
+    ? productsProvider.products
+        : productsProvider.findByCategory(categoryName: passedCategory);
     return GestureDetector(
       onTap: (){
         FocusScope.of(context).unfocus();
@@ -50,9 +56,12 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
 
           ),
-          title: const AppNameTextWidget(fontSize: 20),
+          title:  TitleTextWidget(label: passedCategory ?? "Search products")
         ),
-        body: Padding(
+        body: productList.isEmpty
+          ? const Center(child: TitleTextWidget(label: "No product"),)
+        :
+        Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
@@ -92,9 +101,12 @@ class _SearchScreenState extends State<SearchScreen> {
                 mainAxisSpacing: 12,
                 crossAxisCount: 2,
                 crossAxisSpacing: 12,
-                itemCount: productsProvider.getProducts.length,
+                itemCount: productList.length,
                 builder: (context, index){
-                  return  ProductWidget(productId: productsProvider.getProducts[index].productId );
+                  return  ProductWidget(productId:
+                  productList[index].productId,
+
+                  );
                 },
               ))
 
