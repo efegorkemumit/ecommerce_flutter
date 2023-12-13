@@ -14,13 +14,21 @@ class ProductProvider with ChangeNotifier{
     return products.firstWhere((element) => element.productId==productId);
   }
 
+  List<ProductModel> findByCategory ({required String categoryName}){
+    List<ProductModel> categoryList = products
+        .where((element) => element.productCategory.toLowerCase().contains(
+      categoryName.toLowerCase(),
+    )).toList();
+    return categoryList;
+  }
+
   List <ProductModel> products = [
     ProductModel(
       //1
       productId: 'iphone14-64-black',
       productTitle: "Apple iPhone 14 Pro (128GB) - Black",
       productPrice: "299.99",
-      productCategory: "Phones",
+      productCategory: "shoes",
       productDescription:
       "6.1-inch  magical way to interact with your .  mode, for  on the move. Accident detection, vital safety technology that calls for help for you. All-day battery life and up to 23 hours of video playback.",
       productImage: "https://i.ibb.co/BtMBSgK/1-iphone14-128gb-black.webp",
@@ -31,7 +39,7 @@ class ProductProvider with ChangeNotifier{
       productId: 'samsung-galaxy-s22-ultra',
       productTitle: "Samsung Galaxy S22 Ultra (256GB) - Phantom Black",
       productPrice: "1299.99",
-      productCategory: "Phones",
+      productCategory: "books",
       productDescription:
       "Introducing the Samsung Galaxy S22 Ultra with a stunning 6.8-inch Dynamic AMOLED display. Capture every moment with the 108MP camera. Enjoy the power of the latest Exynos processor and a massive 5000mAh battery. The sleek Phantom Black design adds a touch of elegance to your mobile experience.",
       productImage: "https://i.ibb.co/nbwTvXQ/2-iphone13-mini-256gb-midnight.webp",
