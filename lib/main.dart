@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/constans/theme_data.dart';
+import 'package:ecommerce_flutter/providers/cart_provider.dart';
 import 'package:ecommerce_flutter/providers/product_provider.dart';
 import 'package:ecommerce_flutter/providers/theme_provider.dart';
 import 'package:ecommerce_flutter/root_screen.dart';
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
       }),
       ChangeNotifierProvider(create: (_){
         return ProductProvider();
+      }),
+      ChangeNotifierProvider(create: (_){
+        return CartProvider();
       }),
 
     ],
