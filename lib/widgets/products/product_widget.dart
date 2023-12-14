@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ecommerce_flutter/providers/cart_provider.dart';
 import 'package:ecommerce_flutter/providers/product_provider.dart';
 import 'package:ecommerce_flutter/widgets/products/heart_btn.dart';
 import 'package:ecommerce_flutter/widgets/products/product_details.dart';
@@ -28,6 +29,7 @@ class _ProductWidgetState extends State<ProductWidget> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final productsProvider = Provider.of<ProductProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     final getCurrProduct = productsProvider.findByProId(widget.productId);
     return getCurrProduct == null
     ? SizedBox.shrink()
@@ -89,12 +91,23 @@ class _ProductWidgetState extends State<ProductWidget> {
                         color: Colors.lightBlue,
                         child: InkWell(
                           borderRadius: BorderRadius.circular(12.0),
-                          onTap: () {},
+                          onTap: () {
+                            if(cartProvider.isProdinCart(
+                                productId: getCurrProduct.productId))
+                              {
+                                return;
+                              }
+                            cartProvider.addProductCart(productId: getCurrProduct.productId);
+                          },
                           splashColor: Colors.grey,
-                          child: const Padding
+                          child:  Padding
                             (
                             padding: EdgeInsets.all(2.0),
-                            child: Icon(Icons.add_shopping_cart_outlined),
+                            child: Icon(
+                                cartProvider.isProdinCart(
+                                    productId: getCurrProduct.productId)
+                                ? Icons.check
+                                : Icons.add_shopping_cart_outlined),
                           ),
                         ),
                       )

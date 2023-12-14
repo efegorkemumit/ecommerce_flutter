@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/constans/app_constans.dart';
+import 'package:ecommerce_flutter/providers/cart_provider.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/products/heart_btn.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
@@ -19,6 +20,7 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     final productsProvider = Provider.of<ProductProvider>(context);
     String? productId = ModalRoute.of(context)!.settings.arguments as String?;
     final getCurrProduct = productsProvider.findByProId(productId!);
@@ -105,9 +107,32 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                           borderRadius: BorderRadius.circular(30.0)
                                         ),
                                       ) ,
-                                      onPressed: (){},
-                                      icon: const Icon(Icons.shopping_cart),
-                                      label: const Text("Add to cart")
+                                      onPressed: (){
+
+                                        if(cartProvider.isProdinCart(
+                                            productId: getCurrProduct.productId))
+                                        {
+                                          return;
+                                        }
+
+                                        cartProvider.addProductCart(productId: getCurrProduct.productId);
+
+                                      },
+                                      icon:  Icon(
+                                          cartProvider.isProdinCart(
+                                              productId: getCurrProduct.productId)
+                                              ? Icons.check
+                                              : Icons.add_shopping_cart_outlined),
+
+                                      label: Text(
+
+                                          cartProvider.isProdinCart(
+                                              productId: getCurrProduct.productId)
+                                              ?"In cart"
+                                                :"Add to cart"
+
+
+                                      )
                                   ),
                                 ),
 
