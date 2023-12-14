@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:ecommerce_flutter/constans/app_constans.dart';
+import 'package:ecommerce_flutter/providers/product_provider.dart';
 import 'package:ecommerce_flutter/providers/theme_provider.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
@@ -18,6 +19,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final productsProvider = Provider.of<ProductProvider>(context);
+
     Size size  = MediaQuery.of(context).size;
     return Scaffold(
       // APPBAR ------------------->
@@ -72,9 +75,13 @@ class HomeScreen extends StatelessWidget {
               height: size.height* 0.2,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                  itemCount: 10,
+                  itemCount: productsProvider.getProducts.length,
                   itemBuilder: (context, index){
-                     return TopProductWidget();
+                     return ChangeNotifierProvider.value(
+                         value: productsProvider.getProducts[index],
+                       child: const TopProductWidget(),
+
+                     );
                   }
               ),
             ),

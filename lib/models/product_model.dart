@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 
-class ProductModel{
+class ProductModel with ChangeNotifier{
   final String productId,
       productTitle, 
       productPrice, 
