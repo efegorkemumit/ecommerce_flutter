@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ecommerce_flutter/providers/cart_provider.dart';
 import 'package:ecommerce_flutter/providers/product_provider.dart';
+import 'package:ecommerce_flutter/providers/viewed_recently_providers.dart';
 import 'package:ecommerce_flutter/widgets/products/heart_btn.dart';
 import 'package:ecommerce_flutter/widgets/products/product_details.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
@@ -31,12 +32,17 @@ class _ProductWidgetState extends State<ProductWidget> {
     final productsProvider = Provider.of<ProductProvider>(context);
     final cartProvider = Provider.of<CartProvider>(context);
     final getCurrProduct = productsProvider.findByProId(widget.productId);
+    final viewedProvider = Provider.of<ViewedProdProvider>(context);
+
     return getCurrProduct == null
     ? SizedBox.shrink()
     : Padding(
       padding: EdgeInsets.all(0.0),
       child: GestureDetector(
         onTap: () async{
+
+          viewedProvider.addViewProd(productId: getCurrProduct.productId);
+
           await Navigator.pushNamed(context, ProductDetailScreen.routName,
           arguments: getCurrProduct.productId);
 

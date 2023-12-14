@@ -2,6 +2,7 @@ import 'package:ecommerce_flutter/constans/theme_data.dart';
 import 'package:ecommerce_flutter/providers/cart_provider.dart';
 import 'package:ecommerce_flutter/providers/product_provider.dart';
 import 'package:ecommerce_flutter/providers/theme_provider.dart';
+import 'package:ecommerce_flutter/providers/viewed_recently_providers.dart';
 import 'package:ecommerce_flutter/providers/wishlist_provider.dart';
 import 'package:ecommerce_flutter/root_screen.dart';
 import 'package:ecommerce_flutter/screens/auth/forgot_password.dart';
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
       }),
       ChangeNotifierProvider(create: (_){
         return WishlistProvider();
+      }),
+      ChangeNotifierProvider(create: (_){
+        return ViewedProdProvider();
       }),
 
     ],

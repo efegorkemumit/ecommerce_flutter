@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:ecommerce_flutter/constans/app_constans.dart';
 import 'package:ecommerce_flutter/models/product_model.dart';
 import 'package:ecommerce_flutter/providers/cart_provider.dart';
+import 'package:ecommerce_flutter/providers/viewed_recently_providers.dart';
 import 'package:ecommerce_flutter/widgets/products/heart_btn.dart';
 import 'package:ecommerce_flutter/widgets/products/product_details.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
@@ -21,12 +22,16 @@ class TopProductWidget extends StatelessWidget {
     Size size  = MediaQuery.of(context).size;
     final cartProvider = Provider.of<CartProvider>(context);
     final productsModel = Provider.of<ProductModel>(context);
+    final viewedProvider = Provider.of<ViewedProdProvider>(context);
+
 
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
           onTap: () async{
-            await Navigator.pushNamed(context, ProductDetailScreen.routName,);
+            viewedProvider.addViewProd(productId: productsModel.productId);
+
+            await Navigator.pushNamed(context, ProductDetailScreen.routName, arguments:productsModel.productId );
           },
           child:  SizedBox(
             width: size.width*0.45,
