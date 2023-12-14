@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/providers/cart_provider.dart';
 import 'package:ecommerce_flutter/screens/cart/cart_screen.dart';
 import 'package:ecommerce_flutter/screens/home_screen.dart';
 import 'package:ecommerce_flutter/screens/profile_screen.dart';
@@ -5,6 +6,7 @@ import 'package:ecommerce_flutter/screens/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
+import 'package:provider/provider.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
@@ -31,6 +33,8 @@ class _RootScreenState extends State<RootScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+
     return  Scaffold(
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
@@ -47,7 +51,7 @@ class _RootScreenState extends State<RootScreen> {
           });
           controller.jumpToPage(currentScreen);
         },
-        destinations: const[
+        destinations: [
           NavigationDestination(
               selectedIcon: Icon(CupertinoIcons.home),
               icon:Icon(CupertinoIcons.home),
@@ -64,7 +68,7 @@ class _RootScreenState extends State<RootScreen> {
             icon: Badge(
               backgroundColor: Colors.red,
               textColor: Colors.white,
-              label: Text("5"),
+              label: Text(cartProvider.getCartItems.length.toString()),
               child: Icon(IconlyLight.bag_2),
             ),
             label: "Cart",
