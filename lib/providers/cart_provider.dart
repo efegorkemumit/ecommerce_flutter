@@ -50,6 +50,24 @@ class CartProvider with ChangeNotifier{
 
   }
 
+  void updateQty({required String productId, required int qty}){
+    _cartItems.update(productId, (cartItem) => CartModel(
+        cartId: cartItem.cartId, productId: productId, quantity: qty
+    ));
+    notifyListeners();
+
+  }
+
+  void removeOneItem({required String productId}){
+    _cartItems.remove(productId);
+    notifyListeners();
+  }
+
+  void clearLocalCart(){
+    _cartItems.clear();
+    notifyListeners();
+  }
+
 
 
 }
