@@ -22,8 +22,10 @@ class ProductProvider with ChangeNotifier{
     return categoryList;
   }
 
-  List<ProductModel> searchQuery ({required String searchText}){
-    List<ProductModel> searchList = products.
+  List<ProductModel> searchQuery (
+      {required String searchText, required List<ProductModel> passedList}
+      ){
+    List<ProductModel> searchList = passedList.
     where((element) => element.productTitle.toLowerCase().contains(
       searchText.toLowerCase(),
     )).toList();
@@ -61,7 +63,7 @@ class ProductProvider with ChangeNotifier{
       productId: 'macbook-air-m2-512gb',
       productTitle: "Apple MacBook Air M2 (512GB) - Space Gray",
       productPrice: "1599.99",
-      productCategory: "Laptops",
+      productCategory: "books",
       productDescription:
       "Experience the incredible performance of the Apple MacBook Air M2. Powered by the latest M2 chip, this laptop delivers unparalleled speed and efficiency. The 13.3-inch Retina display offers stunning visuals, while the sleek Space Gray design adds a touch of sophistication.",
       productImage: "https://i.ibb.co/G7nXCW4/3-i-Phone-14.jpg",
