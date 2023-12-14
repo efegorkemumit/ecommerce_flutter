@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/models/cart_model.dart';
+import 'package:ecommerce_flutter/providers/cart_provider.dart';
 import 'package:ecommerce_flutter/providers/product_provider.dart';
 import 'package:ecommerce_flutter/screens/cart/quantity_btm_sheet.dart';
 import 'package:ecommerce_flutter/widgets/products/heart_btn.dart';
@@ -17,6 +18,7 @@ class CardWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     final cartModel = Provider.of<CartModel>(context);
     final productsProvider = Provider.of<ProductProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     final getCurrProduct = productsProvider.findByProId(cartModel.productId);
     return getCurrProduct == null
       ? const SizedBox.shrink()
@@ -52,7 +54,10 @@ class CardWidget extends StatelessWidget {
                         ),
                         Column(
                           children: [
-                            IconButton(onPressed: (){}, icon: const Icon(Icons.clear, color:Colors.red)),
+                            IconButton(onPressed: (){
+                              cartProvider.removeOneItem(productId: getCurrProduct.productId);
+
+                            }, icon: const Icon(Icons.clear, color:Colors.red)),
                             HeartButtonWidget()
 
                           ],
@@ -79,7 +84,7 @@ class CardWidget extends StatelessWidget {
 
                                 context: context,
                                 builder: (context){
-                                  return const QuantityBottomSheetWidget();
+                                  return  QuantityBottomSheetWidget(cartModel: cartModel);
 
                                 },
                             );

@@ -37,7 +37,10 @@ class CartScreen extends StatelessWidget {
         ),
         title:  TitleTextWidget(label: "Cart (${cartProvider.getCartItems.length})"),
         actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.delete_forever_rounded, color:Colors.red))
+          IconButton(onPressed: (){
+            cartProvider.clearLocalCart();
+
+          }, icon: const Icon(Icons.delete_forever_rounded, color:Colors.red))
         ],
       ),
       body: Column(
