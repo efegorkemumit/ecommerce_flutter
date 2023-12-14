@@ -68,7 +68,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ),
                   Flexible(
                     flex:2,
-                      child: HeartButtonWidget(),
+                      child: HeartButtonWidget(productId:getCurrProduct.productId ),
                   )
                 ],
               ),

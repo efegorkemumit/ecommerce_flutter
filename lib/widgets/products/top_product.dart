@@ -62,7 +62,7 @@ class TopProductWidget extends StatelessWidget {
                           child: Row(
                             children: [
                               IconButton(onPressed: () {},
-                                  icon: HeartButtonWidget(),
+                                  icon: HeartButtonWidget(productId:productsModel.productId ),
                               ),
                               IconButton(onPressed: () {
 

@@ -58,7 +58,7 @@ class CardWidget extends StatelessWidget {
                               cartProvider.removeOneItem(productId: getCurrProduct.productId);
 
                             }, icon: const Icon(Icons.clear, color:Colors.red)),
-                            HeartButtonWidget()
+                            HeartButtonWidget(productId: getCurrProduct.productId,)
 
                           ],
                         )

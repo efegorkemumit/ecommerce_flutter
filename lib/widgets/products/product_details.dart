@@ -91,6 +91,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             HeartButtonWidget(
+                              productId: getCurrProduct.productId,
                               bkgColor: Colors.pinkAccent.shade700,
 
                             ),
