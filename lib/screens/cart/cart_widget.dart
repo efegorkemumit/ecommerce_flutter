@@ -1,3 +1,5 @@
+import 'package:ecommerce_flutter/models/cart_model.dart';
+import 'package:ecommerce_flutter/providers/product_provider.dart';
 import 'package:ecommerce_flutter/screens/cart/quantity_btm_sheet.dart';
 import 'package:ecommerce_flutter/widgets/products/heart_btn.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
@@ -5,6 +7,7 @@ import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:iconly/iconly.dart';
+import 'package:provider/provider.dart';
 
 class CardWidget extends StatelessWidget {
   const CardWidget({super.key});
@@ -12,7 +15,12 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return FittedBox(
+    final cartModel = Provider.of<CartModel>(context);
+    final productsProvider = Provider.of<ProductProvider>(context);
+    final getCurrProduct = productsProvider.findByProId(cartModel.productId);
+    return getCurrProduct == null
+      ? const SizedBox.shrink()
+    : FittedBox(
       child: IntrinsicWidth(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -22,7 +30,7 @@ class CardWidget extends StatelessWidget {
              ClipRRect(
                borderRadius: BorderRadius.circular(12.0),
                child: FancyShimmerImage(
-                 imageUrl: 'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+                 imageUrl: getCurrProduct.productImage,
                  height: size.height*0.2,
                  width: size.height*0.2,
                ),
@@ -38,7 +46,7 @@ class CardWidget extends StatelessWidget {
                         SizedBox(
                           width: size.width*0.6,
                           child: TitleTextWidget(
-                            label: "Title" *15,
+                            label: getCurrProduct.productTitle,
 
                           ),
                         ),
@@ -54,7 +62,7 @@ class CardWidget extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        const SubTitleTextWidget(label: "16.00\$", color: Colors.blue),
+                         SubTitleTextWidget(label: "\$  ${getCurrProduct.productPrice}", color: Colors.blue),
                         const Spacer(),
                         OutlinedButton.icon(
                           onPressed: () async{
@@ -77,7 +85,7 @@ class CardWidget extends StatelessWidget {
                             );
                           },
                           icon: const Icon(IconlyLight.arrow_down_2),
-                          label: const Text("QTY : 6"),
+                          label:  Text("QTY : ${cartModel.quantity}"),
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(width: 1),
                             shape: RoundedRectangleBorder(
