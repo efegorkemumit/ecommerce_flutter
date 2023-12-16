@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "375993132013",
+    "project_id": "ecommerce-udemy-ff943",
+    "storage_bucket": "ecommerce-udemy-ff943.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375993132013:android:b783f76f44a59a544bfde4",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJISrSPiPT2guPmLgb8xfJn6M-p4X80UE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
