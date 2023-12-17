@@ -86,10 +86,11 @@ class MyApp extends StatelessWidget {
           title: 'Eccomerce Ap ',
           theme: Styles.themeData(isDarkTheme: themeProvider.getIsDarkTheme, context: context),
 
-     //    home:const LoginScreen(),
-          home:const RootScreen(),
+        home:const LoginScreen(),
+      //    home:const RootScreen(),
           routes: {
             ProductDetailScreen.routName : (context)=> const ProductDetailScreen(),
+            RootScreen.routName : (context)=> const RootScreen(),
             WishlistScreen.routName : (context)=> const WishlistScreen(),
             ViewedRecentlyScreen.routName : (context)=> const ViewedRecentlyScreen(),
             RegisterScreen.routName : (context)=> const RegisterScreen(),

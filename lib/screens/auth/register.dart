@@ -1,10 +1,14 @@
 import 'package:ecommerce_flutter/constans/validator.dart';
+import 'package:ecommerce_flutter/root_screen.dart';
 import 'package:ecommerce_flutter/services/myapp_functions.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/image_picker_widget.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -29,6 +33,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final _formkey = GlobalKey<FormState>();
   XFile? _pickedImage;
+  bool  _isLoading = false;
+  final auth = FirebaseAuth.instance;
+
+
 
   @override
   void initState(){
@@ -69,6 +77,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _registerFCT() async{
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
+
+    if(isValid){
+      try{
+        setState(() {
+          _isLoading=true;
+        });
+        await auth.createUserWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim()
+        );
+        Fluttertoast.showToast(msg: "An accoutn has bee created ", textColor: Colors.white);
+        if(!mounted)
+          return;
+        Navigator.pushReplacementNamed(context, RootScreen.routName);
+      }on FirebaseException catch( error){
+        await MyAppFunctions.showErrorOrWaningDialog(
+            context: context, subtitle: error.message.toString(), fct: (){},
+        );
+
+      }
+      catch(error){
+        await MyAppFunctions.showErrorOrWaningDialog(context: context, subtitle:
+        error.toString(), fct: (){},);
+
+      }
+      finally{
+        setState(() {
+          _isLoading=false;
+        });
+      }
+    }
   }
 
   Future<void> localImagePicker () async{
