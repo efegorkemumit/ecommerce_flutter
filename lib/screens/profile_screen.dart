@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/screens/auth/login.dart';
 import 'package:ecommerce_flutter/screens/init_screen/viewed_recently.dart';
 import 'package:ecommerce_flutter/screens/init_screen/wishlist.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
@@ -6,14 +7,22 @@ import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/order/order_screen.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ecommerce_flutter/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -160,25 +169,39 @@ class ProfileScreen extends StatelessWidget {
 
           Center(
             child: ElevatedButton.icon(
+
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0)
-                )
-              ),
+                  borderRadius: BorderRadius.circular(30.0))),
 
 
                 onPressed: () async {
-                await MyAppFunctions.showErrorOrWaningDialog(
-                  context: context,
-                  subtitle: "are you sure ? ",
-                  fct: () {},
-                  isError : false
-                );
+
+                    if(user==null) {
+                      Navigator.pushNamed(context, LoginScreen.routName);
+                    }
+                    else
+                      {
+                        await MyAppFunctions.showErrorOrWaningDialog(
+                            context: context,
+                            subtitle: "are you sure ? ",
+                            fct: () {},
+                            isError : false
+                        );
+
+                      }
+
+
+              },
 
 
 
-                }, icon: const Icon(Icons.login), label: const Text("Logout")),
+                icon:  Icon(user==null ?  Icons.login : Icons.logout),
+                label:  Text(user==null ? "Login" : "Logout")
+
+
+            ),
           )
 
           
@@ -187,6 +210,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
+
 
 class CustomListTile extends StatelessWidget {
   const CustomListTile({

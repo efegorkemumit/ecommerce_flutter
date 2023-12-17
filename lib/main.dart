@@ -86,8 +86,8 @@ class MyApp extends StatelessWidget {
           title: 'Eccomerce Ap ',
           theme: Styles.themeData(isDarkTheme: themeProvider.getIsDarkTheme, context: context),
 
-        home:const LoginScreen(),
-      //    home:const RootScreen(),
+      //  home:const LoginScreen(),
+          home:const RootScreen(),
           routes: {
             ProductDetailScreen.routName : (context)=> const ProductDetailScreen(),
             RootScreen.routName : (context)=> const RootScreen(),
@@ -97,6 +97,7 @@ class MyApp extends StatelessWidget {
             OrderScreen.routName : (context)=> const OrderScreen(),
             ForgotPassword.routName : (context)=> const ForgotPassword(),
             SearchScreen.routName : (context)=> const SearchScreen(),
+            LoginScreen.routName : (context)=> const LoginScreen(),
 
 
           },

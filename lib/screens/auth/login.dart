@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routName = "/LoginScreen";
+
   const LoginScreen({super.key});
 
   @override
