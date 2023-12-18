@@ -177,16 +177,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
 
                 onPressed: () async {
+                print("1");
 
                     if(user==null) {
                       Navigator.pushNamed(context, LoginScreen.routName);
+                      print("2");
                     }
                     else
                       {
+                        print("3");
                         await MyAppFunctions.showErrorOrWaningDialog(
                             context: context,
                             subtitle: "are you sure ? ",
-                            fct: () {},
+                            fct: () async{
+                              print("4");
+                              await FirebaseAuth.instance.signOut();
+                              if(!mounted) return;
+                              Navigator.pushReplacementNamed(context, LoginScreen.routName);
+                            },
+
                             isError : false
                         );
 

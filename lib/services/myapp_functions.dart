@@ -44,6 +44,7 @@ class MyAppFunctions{
                          visible: !isError,
                         child: TextButton(
                           onPressed: (){
+
                             Navigator.pop(context);
                           },
                           child: const SubTitleTextWidget(label: "Cancel", color:Colors.greenAccent),
@@ -52,7 +53,9 @@ class MyAppFunctions{
                     ),
                     TextButton(
                       onPressed: (){
+                        fct();
                         Navigator.pop(context);
+
 
                       },
                       child: const SubTitleTextWidget(label: "Ok", color:Colors.red),
