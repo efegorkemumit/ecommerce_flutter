@@ -15,7 +15,7 @@ class UserModel with ChangeNotifier{
     required this.userCart,
     required this.userWish,
 
-})
+});
 
 
 }

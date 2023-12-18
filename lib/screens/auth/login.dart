@@ -239,7 +239,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                               borderRadius: BorderRadius.circular(24.0)
                                           )
                                       ),
-                                      onPressed: () async {},
+                                      onPressed: () async {
+
+                                        Navigator.of(context).pushNamed(RootScreen.routName);
+                                      },
                                       child: Text("Guest")
 
 
