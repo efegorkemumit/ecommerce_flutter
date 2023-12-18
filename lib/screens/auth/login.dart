@@ -1,11 +1,16 @@
 import 'package:ecommerce_flutter/constans/validator.dart';
+import 'package:ecommerce_flutter/root_screen.dart';
 import 'package:ecommerce_flutter/screens/auth/forgot_password.dart';
 import 'package:ecommerce_flutter/screens/auth/register.dart';
+import 'package:ecommerce_flutter/services/myapp_functions.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/google_btn.dart';
+import 'package:ecommerce_flutter/widgets/loading_manager.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iconly/iconly.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -26,6 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
   late final FocusNode _passwordFocusNode;
 
   final _formkey = GlobalKey<FormState>();
+  bool  _isLoading = false;
+  final auth = FirebaseAuth.instance;
 
   @override
   void initState(){
@@ -53,6 +60,37 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _loginFct() async{
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
+
+    if(isValid){
+      try{
+        setState(() {
+          _isLoading=true;
+        });
+        await auth.signInWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim()
+        );
+        Fluttertoast.showToast(msg: "Login Successfull ", textColor: Colors.white);
+        if(!mounted)
+          return;
+        Navigator.pushReplacementNamed(context, RootScreen.routName);
+      }on FirebaseException catch( error){
+        await MyAppFunctions.showErrorOrWaningDialog(
+          context: context, subtitle: error.message.toString(), fct: (){},
+        );
+
+      }
+      catch(error){
+        await MyAppFunctions.showErrorOrWaningDialog(context: context, subtitle:
+        error.toString(), fct: (){},);
+
+      }
+      finally{
+        setState(() {
+          _isLoading=false;
+        });
+      }
+    }
   }
 
 
@@ -63,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        body: Padding(
+        body: LoadingManager(isLoading: _isLoading, child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child: Column(
@@ -240,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-
+        )
       ) ,
     );
   }
