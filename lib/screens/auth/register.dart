@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_flutter/constans/validator.dart';
 import 'package:ecommerce_flutter/root_screen.dart';
 import 'package:ecommerce_flutter/services/myapp_functions.dart';
@@ -88,6 +89,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
             email: _emailController.text.trim(),
             password: _passwordController.text.trim()
         );
+        final User? user = auth.currentUser;
+        final String uid =user!.uid;
+
+        await FirebaseFirestore.instance.collection("users").doc(uid).set({
+          'userId':uid,
+          'userName': _nameController.text,
+          'userImage':"",
+          "userEmail":_emailController.text.toLowerCase(),
+          'createdAt':Timestamp.now(),
+          'userCart':[],
+          'userWish':[],
+
+
+        });
+
         Fluttertoast.showToast(msg: "An accoutn has bee created ", textColor: Colors.white);
         if(!mounted)
           return;
