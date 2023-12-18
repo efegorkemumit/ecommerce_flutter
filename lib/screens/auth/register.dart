@@ -3,6 +3,7 @@ import 'package:ecommerce_flutter/root_screen.dart';
 import 'package:ecommerce_flutter/services/myapp_functions.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
 import 'package:ecommerce_flutter/widgets/image_picker_widget.dart';
+import 'package:ecommerce_flutter/widgets/loading_manager.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -143,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
-                body: Padding(
+                body:  LoadingManager(isLoading: _isLoading, child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SingleChildScrollView(
                       child: Column(
@@ -352,6 +353,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     ),
     ),
     )
+        )
     );
   }
 }
