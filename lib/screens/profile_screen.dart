@@ -109,15 +109,18 @@ class _ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveCl
                           color: Theme.of(context).colorScheme.background,
                           width: 3
                         ),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            userModel!.userImage,
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+
+
+
 
                       ),
-                        child: userModel!.userImage.isNotEmpty ? ClipOval(
-                          child: Image.asset(
-                            userModel!.userImage,
-                            fit: BoxFit.fill,
-                          ),
-                        )
-                            :null,
+
                     ),
                     const SizedBox(
                       width: 10,

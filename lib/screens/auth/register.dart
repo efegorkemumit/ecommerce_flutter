@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_flutter/constans/validator.dart';
 import 'package:ecommerce_flutter/root_screen.dart';
@@ -9,6 +11,7 @@ import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iconly/iconly.dart';
@@ -37,6 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   XFile? _pickedImage;
   bool  _isLoading = false;
   final auth = FirebaseAuth.instance;
+  String? userImageUrl;
 
 
 
@@ -76,52 +80,65 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   }
 
-  Future<void> _registerFCT() async{
+  Future<void> _registerFCT() async {
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
-
-    if(isValid){
-      try{
+    if (_pickedImage == null) {
+      MyAppFunctions.showErrorOrWaningDialog(
+          context: context,
+          subtitle: "Make sure to pick up an image",
+          fct: () {});
+      return;
+    }
+    if (isValid) {
+      try {
         setState(() {
-          _isLoading=true;
+          _isLoading = true;
         });
+
         await auth.createUserWithEmailAndPassword(
-            email: _emailController.text.trim(),
-            password: _passwordController.text.trim()
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
         );
+
         final User? user = auth.currentUser;
-        final String uid =user!.uid;
-
+        final String uid = user!.uid;
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child("usersImages")
+            .child("${_emailController.text.trim()}.jpg");
+        await ref.putFile(File(_pickedImage!.path));
+        userImageUrl = await ref.getDownloadURL();
         await FirebaseFirestore.instance.collection("users").doc(uid).set({
-          'userId':uid,
+          'userId': uid,
           'userName': _nameController.text,
-          'userImage':"",
-          "userEmail":_emailController.text.toLowerCase(),
-          'createdAt':Timestamp.now(),
-          'userCart':[],
-          'userWish':[],
-
-
+          'userImage': userImageUrl,
+          'userEmail': _emailController.text.toLowerCase(),
+          'createdAt': Timestamp.now(),
+          'userWish': [],
+          'userCart': [],
         });
-
-        Fluttertoast.showToast(msg: "An accoutn has bee created ", textColor: Colors.white);
-        if(!mounted)
-          return;
-        Navigator.pushReplacementNamed(context, RootScreen.routName);
-      }on FirebaseException catch( error){
-        await MyAppFunctions.showErrorOrWaningDialog(
-            context: context, subtitle: error.message.toString(), fct: (){},
+        Fluttertoast.showToast(
+          msg: "An account has been created",
+          textColor: Colors.white,
         );
-
-      }
-      catch(error){
-        await MyAppFunctions.showErrorOrWaningDialog(context: context, subtitle:
-        error.toString(), fct: (){},);
-
-      }
-      finally{
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, RootScreen.routName);
+      } on FirebaseException catch (error) {
+        await MyAppFunctions.showErrorOrWaningDialog(
+          context: context,
+          subtitle: error.message.toString(),
+          fct: () {},
+        );
+      } catch (error) {
+        await MyAppFunctions.showErrorOrWaningDialog(
+          context: context,
+          subtitle: error.toString(),
+          fct: () {},
+        );
+      } finally {
         setState(() {
-          _isLoading=false;
+          _isLoading = false;
         });
       }
     }

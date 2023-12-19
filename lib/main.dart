@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
           appId: '1:375993132013:web:173caaec9586c7f44bfde4',
           messagingSenderId: '375993132013',
           projectId: 'ecommerce-udemy-ff943',
+          storageBucket: 'ecommerce-udemy-ff943.appspot.com',
       )
     ),
         builder: (context, snapshot){
