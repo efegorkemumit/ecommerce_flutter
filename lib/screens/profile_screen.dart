@@ -1,9 +1,12 @@
+import 'package:ecommerce_flutter/models/user_model.dart';
+import 'package:ecommerce_flutter/providers/user_provider.dart';
 import 'package:ecommerce_flutter/screens/auth/login.dart';
 import 'package:ecommerce_flutter/screens/init_screen/viewed_recently.dart';
 import 'package:ecommerce_flutter/screens/init_screen/wishlist.dart';
 import 'package:ecommerce_flutter/services/assets_manages.dart';
 import 'package:ecommerce_flutter/services/myapp_functions.dart';
 import 'package:ecommerce_flutter/widgets/app_name_text.dart';
+import 'package:ecommerce_flutter/widgets/loading_manager.dart';
 import 'package:ecommerce_flutter/widgets/order/order_screen.dart';
 import 'package:ecommerce_flutter/widgets/subtitle_text.dart';
 import 'package:ecommerce_flutter/widgets/title_text.dart';
@@ -23,6 +26,40 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   User? user = FirebaseAuth.instance.currentUser;
+  UserModel? userModel;
+  bool _isLoading = true;
+
+  Future<void> fetchUserInfo() async{
+
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try{
+      setState(() {
+        _isLoading =true;
+      });
+      userModel = await userProvider.fetchUserInfo();
+
+    }catch (error){
+      await MyAppFunctions.showErrorOrWaningDialog(
+          context: context, subtitle: error.toString(), fct: (){}
+      );
+    }
+    finally{
+      setState(() {
+        _isLoading=false;
+      });
+    }
+
+
+
+  }
+
+  @override
+  void initState(){
+    fetchUserInfo();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -38,15 +75,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         title: const AppNameTextWidget(fontSize: 20),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: LoadingManager(isLoading: _isLoading, child:  Column(
+        crossAxisAlignment:  user == null ? CrossAxisAlignment.center : CrossAxisAlignment.center,
+        mainAxisAlignment: user == null ? MainAxisAlignment.center  : MainAxisAlignment.start,
         children: [
           // Kullanıcı Giriş Uyarısı
-          const Visibility(
-              visible: false,
+           Visibility(
+              visible: user == null ? true : false,
               child: Padding(padding: const EdgeInsets.all(8.0),
-              child: TitleTextWidget(label: "label"),)
+              child: TitleTextWidget(label: "Please login to have unlimited access"),)
           ),
+
+
+          userModel == null
+          ? const SizedBox.shrink()
+              :
           Visibility(
             visible: true,
               child: Padding(
@@ -65,24 +108,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
 
                       ),
-                        child:ClipOval(
+                        child: userModel!.userImage.isNotEmpty ? ClipOval(
                           child: Image.asset(
-                            AssetsManager.computer,
+                            userModel!.userImage,
                             fit: BoxFit.fill,
                           ),
                         )
+                            :null,
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        TitleTextWidget(label: "Efe Görkem Ümit"),
+                      children:  [
+                        TitleTextWidget(label: userModel!.userName),
                         SizedBox(
                           height:6,
                         ),
-                        SubTitleTextWidget(label: "Coding --- Youtube Efe Görkem Ümit")
+                        SubTitleTextWidget(label: userModel!.userEmail)
 
                       ],
 
@@ -96,6 +140,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const SizedBox(
             height: 15,
           ),
+          userModel == null
+              ? const SizedBox.shrink()
+              :
           Padding(
               padding: const EdgeInsets.all(14.0),
               child: Column(
@@ -177,20 +224,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
 
                 onPressed: () async {
-                print("1");
 
                     if(user==null) {
                       Navigator.pushNamed(context, LoginScreen.routName);
-                      print("2");
                     }
                     else
                       {
-                        print("3");
                         await MyAppFunctions.showErrorOrWaningDialog(
                             context: context,
                             subtitle: "are you sure ? ",
                             fct: () async{
-                              print("4");
                               await FirebaseAuth.instance.signOut();
                               if(!mounted) return;
                               Navigator.pushReplacementNamed(context, LoginScreen.routName);
@@ -215,6 +258,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           
         ],
+      ),
       ),
     );
   }
