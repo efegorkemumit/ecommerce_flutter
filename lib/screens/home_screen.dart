@@ -67,15 +67,18 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 15.0,
             ),
-            const TitleTextWidget(label: "Top Product"),
+            Visibility(visible:productsProvider.getProducts.isNotEmpty, child:
+             TitleTextWidget(label: "Top Product"),
+            ),
             const SizedBox(
               height: 15.0,
             ),
-            SizedBox(
+            Visibility(visible:productsProvider.getProducts.isNotEmpty,
+              child: SizedBox(
               height: size.height* 0.2,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                  itemCount: productsProvider.getProducts.length,
+                  itemCount: productsProvider.getProducts.length < 5 ? productsProvider.getProducts.length : 5,
                   itemBuilder: (context, index){
                      return ChangeNotifierProvider.value(
                          value: productsProvider.getProducts[index],
@@ -85,6 +88,7 @@ class HomeScreen extends StatelessWidget {
                   }
               ),
             ),
+        ),
             const TitleTextWidget(label: "Categories"),
             const SizedBox(
               height: 15.0,
