@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/providers/cart_provider.dart';
+import 'package:ecommerce_flutter/providers/product_provider.dart';
 import 'package:ecommerce_flutter/screens/cart/cart_screen.dart';
 import 'package:ecommerce_flutter/screens/home_screen.dart';
 import 'package:ecommerce_flutter/screens/profile_screen.dart';
@@ -20,6 +21,7 @@ class _RootScreenState extends State<RootScreen> {
   late List<Widget> screens;
   int currentScreen = 0;
   late PageController controller;
+  bool isLoadingProd = true;
   @override
   void initState(){
     super.initState();
@@ -32,6 +34,28 @@ class _RootScreenState extends State<RootScreen> {
     controller = PageController(initialPage: currentScreen);
 
   }
+
+  Future<void> fetchFctProd() async {
+    final productsProvider = Provider.of<ProductProvider>(context, listen:  false);
+
+    try{
+      Future.wait({
+        productsProvider.fetchProducts(),
+      });
+
+    }catch(error){
+      print(error.toString());
+    }
+  }
+  @override
+  void didChangeDependencies(){
+    if(isLoadingProd){
+      fetchFctProd();
+    }
+    super.didChangeDependencies();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
